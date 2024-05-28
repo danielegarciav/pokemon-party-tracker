@@ -1,0 +1,95 @@
+.pokemonTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  contain: paint;
+
+  position: relative;
+
+  thead {
+    background-color: #f2f2f2;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  th {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  tbody tr {
+    cursor: pointer;
+    height: 42px;
+
+    &:nth-child(even) {
+      background-color: rgb(247, 247, 247);
+    }
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+
+  .idColumn {
+    text-align: center;
+    width: 3rem;
+    &:not(th) {
+      font-family: monospace;
+    }
+  }
+
+  .spriteFlexContainer {
+    display: flex;
+    align-items: center;
+  }
+
+  .spriteColumn {
+    vertical-align: middle;
+    width: 4rem;
+    image-rendering: pixelated;
+    img {
+      height: 42px;
+    }
+  }
+
+  .typesColumn {
+    vertical-align: center;
+  }
+
+  .typesFlexContainer {
+    display: flex;
+    gap: 0.1rem 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .typeBubble {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border-radius: 1rem;
+    font-size: 0.7rem;
+    text-align: center;
+    background-color: var(--bg-color, aquamarine);
+    text-transform: uppercase;
+    font-family: monospace;
+  }
+}
+
+.pokemonTableFooter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+  background-color: #f2f2f2;
+  position: sticky;
+  bottom: 0;
+  padding: 0.5rem;
+}
