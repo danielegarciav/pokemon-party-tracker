@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import css from './App.module.css';
 import { getPokemonList } from './queries/pokemon';
 
-const titlecase = (str: string) => str[0].toUpperCase() + str.slice(1);
+/** Converts `kebab-case` to `Title Case`. */
+const formatName = (str: string) =>
+  str[0].toUpperCase() + str.slice(1).replace(/-([a-z])/g, (_, letter) => ' ' + letter.toUpperCase());
 
 const FadingImg = ({ src, alt }: { src: string; alt: string }) => {
   const ref = useRef<HTMLImageElement | null>(null);
@@ -53,12 +55,11 @@ export default function App() {
                   )}
                 </div>
               </td>
-              <td>{titlecase(pokemon.name)}</td>
+              <td>{formatName(pokemon.name)}</td>
               <td className={css.typesColumn}>
                 <div className={css.typesFlexContainer}>
                   {pokemon.types.map(type => (
-                    <span key={type.slot} className={css.typeBubble}>
-                      {titlecase(type.type.name)}
+                      {formatName(type.type.name)}
                     </span>
                   ))}
                 </div>
