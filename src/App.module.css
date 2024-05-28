@@ -46,6 +46,7 @@
   .spriteFlexContainer {
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
   .spriteColumn {
@@ -54,6 +55,12 @@
     image-rendering: pixelated;
     img {
       height: 42px;
+      transition: all 0.2s;
+
+      &.isLoadingSprite {
+        filter: blur(2px);
+        opacity: 0;
+      }
     }
   }
 

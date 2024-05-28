@@ -1,9 +1,23 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import clsx from 'clsx';
+import { useEffect, useRef, useState } from 'react';
 import css from './App.module.css';
 import { getPokemonList } from './queries/pokemon';
 
 const titlecase = (str: string) => str[0].toUpperCase() + str.slice(1);
+
+const FadingImg = ({ src, alt }: { src: string; alt: string }) => {
+  const ref = useRef<HTMLImageElement | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const onLoad = () => setIsLoading(false);
+    element.addEventListener('load', onLoad);
+    return () => element.removeEventListener('load', onLoad);
+  }, []);
+  return <img ref={ref} src={src} alt={alt} className={clsx(isLoading && css.isLoadingSprite)} />;
+};
 
 export default function App() {
   const [page, setPage] = useState(0);
@@ -33,9 +47,9 @@ export default function App() {
               <td className={css.spriteColumn}>
                 <div className={css.spriteFlexContainer}>
                   {pokemon.sprites.front_default ? (
-                    <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                    <FadingImg src={pokemon.sprites.front_default} alt={pokemon.name} />
                   ) : (
-                    'No sprite'
+                    <span style={{ width: '56px', textAlign: 'center' }}>?</span>
                   )}
                 </div>
               </td>
