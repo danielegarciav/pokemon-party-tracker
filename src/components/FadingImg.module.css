@@ -1,0 +1,8 @@
+.fadingImg {
+  transition: all 0.2s;
+
+  &.isLoading {
+    filter: blur(2px);
+    opacity: 0;
+  }
+}

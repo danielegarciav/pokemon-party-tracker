@@ -1,26 +1,13 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import clsx from 'clsx';
-import { useEffect, useRef, useState, type CSSProperties as CSSProps } from 'react';
+import { useState, type CSSProperties as CSSProps } from 'react';
 import css from './App.module.css';
+import { FadingImg } from './components/FadingImg';
 import { getTypeBgColor } from './data/pokemon-types';
 import { getPokemonList } from './queries/pokemon';
 
 /** Converts `kebab-case` to `Title Case`. */
 const formatName = (str: string) =>
   str[0].toUpperCase() + str.slice(1).replace(/-([a-z])/g, (_, letter) => ' ' + letter.toUpperCase());
-
-const FadingImg = ({ src, alt }: { src: string; alt: string }) => {
-  const ref = useRef<HTMLImageElement | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-    const onLoad = () => setIsLoading(false);
-    element.addEventListener('load', onLoad);
-    return () => element.removeEventListener('load', onLoad);
-  }, []);
-  return <img ref={ref} src={src} alt={alt} className={clsx(isLoading && css.isLoadingSprite)} />;
-};
 
 export default function App() {
   const [page, setPage] = useState(0);

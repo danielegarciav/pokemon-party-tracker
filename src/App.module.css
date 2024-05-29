@@ -53,14 +53,9 @@
     vertical-align: middle;
     width: 4rem;
     image-rendering: pixelated;
+
     img {
       height: 42px;
-      transition: all 0.2s;
-
-      &.isLoadingSprite {
-        filter: blur(2px);
-        opacity: 0;
-      }
     }
   }
 
