@@ -41,7 +41,8 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   padding: 0.25rem 1rem;
   font-size: 1em;
   font-weight: 500;
