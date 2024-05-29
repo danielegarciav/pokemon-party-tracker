@@ -4,10 +4,7 @@ import css from './App.module.css';
 import { FadingImg } from './components/FadingImg';
 import { getTypeBgColor } from './data/pokemon-types';
 import { getPokemonList } from './queries/pokemon';
-
-/** Converts `kebab-case` to `Title Case`. */
-const formatName = (str: string) =>
-  str[0].toUpperCase() + str.slice(1).replace(/-([a-z])/g, (_, letter) => ' ' + letter.toUpperCase());
+import { kebabCaseToTitleCase as formatName } from './util/case-conversion';
 
 export default function App() {
   const [page, setPage] = useState(0);
