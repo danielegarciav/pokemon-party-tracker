@@ -69,7 +69,7 @@ export const PokemonTable: FC = () => {
       </table>
       <div className={css.pokemonTableFooter}>
         <button
-          onClick={() => dispatch(setPage(page => Math.max(0, page - 1)))}
+          onClick={() => dispatch(setPage(Math.max(0, page - 1)))}
           disabled={page === 0 || displayedTypeFilter !== pokemonTypeFilter}
         >
           Prev
@@ -78,7 +78,7 @@ export const PokemonTable: FC = () => {
           Page {page + 1} of {lastPage + 1}
         </span>
         <button
-          onClick={() => dispatch(setPage(page => Math.min(lastPage, page + 1)))}
+          onClick={() => dispatch(setPage(Math.min(lastPage, page + 1)))}
           disabled={page >= lastPage || displayedTypeFilter !== pokemonTypeFilter}
         >
           Next

@@ -19,8 +19,8 @@ const pokemonTable = createSlice({
       state.page = 0;
       state.typeFilter = action.payload;
     },
-    setPage(state, action: PayloadAction<(currentPage: number) => number>) {
-      state.page = action.payload(state.page);
+    setPage(state, action: PayloadAction<number>) {
+      state.page = action.payload;
     },
   },
 });
