@@ -38,7 +38,7 @@ export default function App() {
         </thead>
         <tbody>
           {query.data.items.map(pokemon => (
-            <tr key={pokemon.id}>
+            <tr key={pokemon.id} tabIndex={0}>
               <td className={css.idColumn}>{pokemon.id}</td>
               <td className={css.spriteColumn}>
                 <div className={css.spriteFlexContainer}>
