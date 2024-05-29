@@ -32,7 +32,7 @@ const RosterView = () => {
           Empty
         </div>
       )),
-    [],
+    [emptySpotCount],
   );
 
   return (
