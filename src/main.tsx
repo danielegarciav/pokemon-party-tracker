@@ -1,8 +1,10 @@
-import { QueryClient, QueryClientProvider, keepPreviousData } from '@tanstack/react-query';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { store } from './store/root';
+
+import { QueryClient, QueryClientProvider, keepPreviousData } from '@tanstack/react-query';
 import { Provider as ReduxProvider } from 'react-redux';
+import { store } from './store/root';
+
 import App from './App.tsx';
 
 const reactRootElement = document.getElementById('root');

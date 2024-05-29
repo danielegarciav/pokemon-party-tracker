@@ -1,7 +1,9 @@
+import { useMemo, type FC, type ReactNode } from 'react';
+
 import clsx from 'clsx';
 import type { Pokemon } from 'pokenode-ts';
-import { useMemo, type FC, type ReactNode } from 'react';
 import { Drawer } from 'vaul';
+
 import {
   closeDrawer,
   displayPokemonDetails,
@@ -12,9 +14,11 @@ import {
 import { useDispatch, useSelector } from '../store/hooks';
 import { ROSTER_LIMIT, addPokemon, removePokemon, selectRoster, selectRosterIsFull } from '../store/roster';
 import { kebabCaseToTitleCase as formatName } from '../util/case-conversion';
-import css from './Drawer.module.css';
+
 import { FadingImg } from './FadingImg';
 import { PokemonTypeDisplay } from './PokemonTypeDisplay';
+
+import css from './Drawer.module.css';
 
 const RosterView = () => {
   const dispatch = useDispatch();

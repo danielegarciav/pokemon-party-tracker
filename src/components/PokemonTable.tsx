@@ -1,12 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
 import { type FC } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
+
 import { FadingImg } from '../components/FadingImg';
 import { PokemonTypeDisplay } from '../components/PokemonTypeDisplay';
+
 import { getPokemonList } from '../queries/pokemon';
 import { displayPokemonDetails } from '../store/drawer';
 import { useDispatch, useSelector } from '../store/hooks';
 import { selectTablePage, selectTableTypeFilter, setPage } from '../store/pokemon-table';
 import { kebabCaseToTitleCase as formatName } from '../util/case-conversion';
+
 import css from './PokemonTable.module.css';
 
 export const PokemonTable: FC = () => {
