@@ -5,7 +5,7 @@ export interface PokemonType {
 
 /**
  * Mapping of Pokemon types, by name, to their IDs and background colors.
- * The names and IDs correspond to those returned by PokeApi (pokenode-ts).
+ * The names and IDs correspond to those returned by PokeAPI (pokenode-ts).
  * Background colors were extracted from table at: https://bulbapedia.bulbagarden.net/wiki/Type
  */
 export const pokemonTypes: Record<string, PokemonType> = {
