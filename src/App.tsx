@@ -16,6 +16,7 @@ export default function App() {
   if (query.isLoading) return <p>Loading...</p>;
   if (query.isError) return <p>Error: {query.error.message}</p>;
   if (!query.data) return <p>No data</p>;
+  const lastPage = query.data.lastPage;
   return (
     <div>
       <table className={css.pokemonTable} style={{ opacity: query.isPlaceholderData ? 0.5 : 1 }}>
@@ -28,7 +29,7 @@ export default function App() {
           </tr>
         </thead>
         <tbody>
-          {query.data.map(pokemon => (
+          {query.data.items.map(pokemon => (
             <tr key={pokemon.id}>
               <td className={css.idColumn}>{pokemon.id}</td>
               <td className={css.spriteColumn}>
@@ -59,9 +60,15 @@ export default function App() {
         </tbody>
       </table>
       <div className={css.pokemonTableFooter}>
-        <button onClick={() => setPage(page => Math.max(0, page - 1))}>Prev</button>
-        <span>Page {page + 1}</span>
-        <button onClick={() => setPage(page => page + 1)}>Next</button>
+        <button onClick={() => setPage(page => Math.max(0, page - 1))} disabled={page === 0}>
+          Prev
+        </button>
+        <span>
+          Page {page + 1} of {lastPage + 1}
+        </span>
+        <button onClick={() => setPage(page => Math.min(lastPage, page + 1))} disabled={page >= lastPage}>
+          Next
+        </button>
       </div>
     </div>
   );
