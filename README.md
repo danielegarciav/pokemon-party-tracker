@@ -1,30 +1,27 @@
-# React + TypeScript + Vite
+# poke-party-tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple SPA web app to track your Pokemon party. Built with React, Vite, TypeScript, Redux, `pokenode-ts`, React Query (aka TanStack Query), among others.
 
-Currently, two official plugins are available:
+Developed using Node.js LTS 20.11.1.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## To run the app
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+npm install
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The server will listen at `http://localhost:5173` by default.
+
+## To run the tests
+
+```bash
+npm run test
+```
+
+## Features
+
+- Navigate through the entire list of Pokemon, using parallel and cached requests to the PokeAPI.
+- Filter the list of Pokemon by their type. Only requests the data it needs from the PokeAPI when necessary.
+- Add and remove Pokemon from your party.
+
