@@ -2,6 +2,9 @@ import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import css from './FadingImg.module.css';
 
+/**
+ * Fading image component that fades in when the image is loaded.
+ */
 export const FadingImg = ({ src, alt }: { src: string; alt: string }) => {
   const ref = useRef<HTMLImageElement | null>(null);
   const [isLoading, setIsLoading] = useState(true);
