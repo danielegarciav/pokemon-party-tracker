@@ -52,7 +52,6 @@
   .spriteColumn {
     vertical-align: middle;
     width: 4rem;
-    image-rendering: pixelated;
 
     img {
       height: 42px;
