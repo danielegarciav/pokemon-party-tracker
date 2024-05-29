@@ -99,12 +99,6 @@
     button {
       width: 300px;
       padding: 0.5rem 4rem;
-      transition: all 0.2s;
-      user-select: none;
-      &:active {
-        transform: scale(0.95);
-        filter: brightness(0.7);
-      }
     }
 
     .closeButton {

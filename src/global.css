@@ -31,7 +31,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.2s, border-color 0.25s;
   user-select: none;
 }
 button:hover {
@@ -44,6 +44,10 @@ button:focus-visible {
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+button:not(:disabled):active {
+  transform: scale(0.95);
+  filter: brightness(0.7);
 }
 
 #root {
