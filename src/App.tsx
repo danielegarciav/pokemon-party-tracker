@@ -1,7 +1,8 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties as CSSProps } from 'react';
 import css from './App.module.css';
+import { getTypeBgColor } from './data/pokemon-types';
 import { getPokemonList } from './queries/pokemon';
 
 /** Converts `kebab-case` to `Title Case`. */
@@ -33,7 +34,7 @@ export default function App() {
   if (!query.data) return <p>No data</p>;
   return (
     <div>
-      <table className={css.pokemonTable}>
+      <table className={css.pokemonTable} style={{ opacity: query.isPlaceholderData ? 0.5 : 1 }}>
         <thead>
           <tr>
             <th className={css.idColumn}>ID</th>
@@ -59,6 +60,11 @@ export default function App() {
               <td className={css.typesColumn}>
                 <div className={css.typesFlexContainer}>
                   {pokemon.types.map(type => (
+                    <span
+                      key={type.slot}
+                      className={css.typeBubble}
+                      style={{ '--bg-color': getTypeBgColor(type.type.name) } as CSSProps}
+                    >
                       {formatName(type.type.name)}
                     </span>
                   ))}

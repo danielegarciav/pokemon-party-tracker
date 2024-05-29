@@ -80,7 +80,8 @@
     border-radius: 1rem;
     font-size: 0.7rem;
     text-align: center;
-    background-color: var(--bg-color, aquamarine);
+    color: white;
+    background-color: var(--bg-color, black);
     text-transform: uppercase;
     font-family: monospace;
   }
