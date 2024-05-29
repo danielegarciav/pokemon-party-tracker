@@ -50,15 +50,17 @@ const RosterView = () => {
       <div className={css.rosterList}>
         {currentRoster.map(pokemon => {
           const image = pokemon.sprites.front_default;
-
           return (
-            <button className={css.rosterItem} onClick={() => dispatch(displayPokemonDetails(pokemon))}>
+            <button
+              key={pokemon.id}
+              className={css.rosterItem}
+              onClick={() => dispatch(displayPokemonDetails(pokemon))}
+            >
               {image ? (
                 <FadingImg src={image} alt={pokemon.name} />
               ) : (
                 <div className={css.noImage}>No image</div>
               )}
-
               {formatName(pokemon.name)}
             </button>
           );
