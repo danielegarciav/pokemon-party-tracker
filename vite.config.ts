@@ -4,6 +4,7 @@ import { browserslistToTargets } from 'lightningcss';
 import browserslist from 'browserslist';
 
 // https://vitejs.dev/config/
+// lightningcss setup: https://lightningcss.dev/docs.html#with-vite
 export default defineConfig({
   plugins: [react()],
   css: {
