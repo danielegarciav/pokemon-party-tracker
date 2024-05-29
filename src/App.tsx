@@ -13,9 +13,17 @@ export default function App() {
     queryFn: getPokemonList,
     placeholderData: keepPreviousData,
   });
-  if (query.isLoading) return <p>Loading...</p>;
-  if (query.isError) return <p>Error: {query.error.message}</p>;
-  if (!query.data) return <p>No data</p>;
+
+  if (query.isPending) return <p>Loading...</p>;
+  if (query.isError)
+    return (
+      <div className={css.messageBox}>
+        <h3>Error!</h3>
+        <p>{query.error.message}</p>
+        <button onClick={() => query.refetch()}>Retry</button>
+      </div>
+    );
+
   const lastPage = query.data.lastPage;
   return (
     <div>
