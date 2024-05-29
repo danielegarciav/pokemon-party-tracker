@@ -16,21 +16,25 @@ export const getPokemonList: QueryFunction<
   [key: string, { offset: number; limit: number; type?: string }]
 > = async ({ queryKey }) => {
   const [, { offset, limit, type }] = queryKey;
+
+  // If a type is provided, we fetch the names of all pokemons of that type in a single request.
+  // We then request details for a paginated subset of those pokemons. Pagination is done on our side.
   if (type) {
     const typeData = await api.getTypeByName(type);
-    const pokemonPromises = typeData.pokemon.map(pokemon => api.getPokemonByName(pokemon.pokemon.name));
-    const allPokemon = await Promise.all(pokemonPromises);
+    const slicedPokemonList = typeData.pokemon.slice(offset, offset + limit);
+    const pokemonDataPromises = slicedPokemonList.map(pokemon => api.getPokemonByName(pokemon.pokemon.name));
 
-    const items = allPokemon.slice(offset, offset + limit);
+    const items = await Promise.all(pokemonDataPromises);
     const page = Math.floor(offset / limit);
-    const lastPage = Math.max(0, Math.ceil(allPokemon.length / limit) - 1);
+    const lastPage = Math.max(0, Math.ceil(typeData.pokemon.length / limit) - 1);
     return { page, lastPage, type, items };
   }
-  const list = await api.listPokemons(offset, limit);
-  const pokemonPromises = list.results.map(pokemon => api.getPokemonByName(pokemon.name));
 
-  const items = await Promise.all(pokemonPromises);
+  const pokemonList = await api.listPokemons(offset, limit);
+  const pokemonDataPromises = pokemonList.results.map(pokemon => api.getPokemonByName(pokemon.name));
+
+  const items = await Promise.all(pokemonDataPromises);
   const page = Math.floor(offset / limit);
-  const lastPage = Math.max(0, Math.ceil(list.count / limit) - 1);
+  const lastPage = Math.max(0, Math.ceil(pokemonList.count / limit) - 1);
   return { page, lastPage, type, items };
 };
