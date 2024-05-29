@@ -61,24 +61,6 @@
   .typesColumn {
     vertical-align: center;
   }
-
-  .typesFlexContainer {
-    display: flex;
-    gap: 0.1rem 0.4rem;
-    flex-wrap: wrap;
-  }
-
-  .typeBubble {
-    display: inline-block;
-    padding: 0.1rem 0.45rem;
-    border-radius: 1rem;
-    font-size: 0.7rem;
-    text-align: center;
-    color: white;
-    background-color: var(--bg-color, black);
-    text-transform: uppercase;
-    font-family: monospace;
-  }
 }
 
 .pokemonTableFooter {
