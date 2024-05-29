@@ -1,4 +1,4 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useState, type CSSProperties as CSSProps } from 'react';
 import css from './App.module.css';
 import { FadingImg } from './components/FadingImg';
@@ -9,9 +9,8 @@ import { kebabCaseToTitleCase as formatName } from './util/case-conversion';
 export default function App() {
   const [page, setPage] = useState(0);
   const query = useQuery({
-    queryKey: ['pokemon-list', { limit: 20, offset: page * 20 }],
     queryFn: getPokemonList,
-    placeholderData: keepPreviousData,
+    queryKey: ['pokemon-list', { limit: 20, offset: page * 20 }],
   });
 
   if (query.isPending) return <p>Loading...</p>;
