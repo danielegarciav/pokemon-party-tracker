@@ -8,6 +8,7 @@ export interface ListResponse<T> {
   items: T[];
 }
 
+// All network requests made by pokenode-ts are cached, we can safely call its methods multiple times.
 const api = new PokemonClient();
 
 export const getPokemonList: QueryFunction<
