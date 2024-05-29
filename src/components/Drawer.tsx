@@ -1,18 +1,71 @@
+import clsx from 'clsx';
 import type { Pokemon } from 'pokenode-ts';
-import { type FC, type ReactNode } from 'react';
+import { useMemo, type FC, type ReactNode } from 'react';
 import { Drawer } from 'vaul';
-import { closeDrawer, displayRoster, selectCurrentPokemon, selectIsDrawerOpen } from '../store/drawer';
+import {
+  closeDrawer,
+  displayPokemonDetails,
+  displayRoster,
+  selectCurrentPokemon,
+  selectIsDrawerOpen,
+} from '../store/drawer';
 import { useDispatch, useSelector } from '../store/hooks';
-import { addPokemon, removePokemon, selectRoster, selectRosterIsFull } from '../store/roster';
+import { ROSTER_LIMIT, addPokemon, removePokemon, selectRoster, selectRosterIsFull } from '../store/roster';
 import { kebabCaseToTitleCase as formatName } from '../util/case-conversion';
 import css from './Drawer.module.css';
 import { FadingImg } from './FadingImg';
 import { PokemonTypeDisplay } from './PokemonTypeDisplay';
 
 const RosterView = () => {
+  const dispatch = useDispatch();
   const currentRoster = useSelector(selectRoster);
+  const emptySpotCount = ROSTER_LIMIT - currentRoster.length;
 
-  return <div>{currentRoster.map(p => formatName(p.name)).join(', ')}</div>;
+  const emptySpotNodes = useMemo(
+    () =>
+      Array.from({ length: emptySpotCount }, (_, i) => (
+        <div key={ROSTER_LIMIT - i} className={clsx(css.rosterItem, css.empty)}>
+          Empty
+        </div>
+      )),
+    [],
+  );
+
+  return (
+    <div className={css.rosterView}>
+      <h2 className={css.rosterTitle}>Your Pokemon party</h2>
+      <p className={css.rosterSubtitle}>
+        {currentRoster.length === 0 ? (
+          <span>Your party is empty</span>
+        ) : (
+          <span>
+            {currentRoster.length} {currentRoster.length === 1 ? 'Pokemon' : 'Pokemons'}
+          </span>
+        )}
+      </p>
+      <div className={css.rosterList}>
+        {currentRoster.map(pokemon => {
+          const image = pokemon.sprites.front_default;
+
+          return (
+            <button className={css.rosterItem} onClick={() => dispatch(displayPokemonDetails(pokemon))}>
+              {image ? (
+                <FadingImg src={image} alt={pokemon.name} />
+              ) : (
+                <div className={css.noImage}>No image</div>
+              )}
+
+              {formatName(pokemon.name)}
+            </button>
+          );
+        })}
+        {emptySpotNodes}
+      </div>
+      <button className={css.closeButton} onClick={() => dispatch(closeDrawer())}>
+        Close
+      </button>
+    </div>
+  );
 };
 
 const PokemonView = ({ pokemon }: { pokemon: Pokemon }) => {

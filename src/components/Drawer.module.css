@@ -106,3 +106,89 @@
     }
   }
 }
+
+.rosterView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+  max-width: 720px;
+  overflow-y: auto;
+
+  @media (min-width: 720px) {
+    margin: 0 auto;
+  }
+
+  .rosterTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0rem;
+  }
+
+  .rosterSubtitle {
+    margin-bottom: 1rem;
+  }
+
+  .rosterList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+
+    @media (min-width: 720px) {
+      grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+    }
+  }
+
+  .rosterItem {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.025);
+    transition: all 0.2s;
+    cursor: pointer;
+    user-select: none;
+    height: 56px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    img {
+      height: 100%;
+      transform: scale(2);
+      margin-right: 0.75rem;
+    }
+
+    .pokemonName {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+
+    &.empty {
+      color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.05);
+      border: 1px solid transparent;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      cursor: default;
+    }
+  }
+
+  .closeButton {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    @media (min-width: 720px) {
+      max-width: 200px;
+    }
+  }
+}
