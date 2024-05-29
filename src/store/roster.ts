@@ -28,4 +28,5 @@ const rosterSlice = createSlice({
 export const { addPokemon, removePokemon } = rosterSlice.actions;
 export const selectRoster = (state: RootState) => state.roster.pokemons;
 export const selectRosterIsFull = (state: RootState) => state.roster.pokemons.length >= ROSTER_LIMIT;
+export const selectRosterCount = (state: RootState) => state.roster.pokemons.length;
 export const rosterReducer = rosterSlice.reducer;
