@@ -33,6 +33,7 @@ button {
   cursor: pointer;
   transition: all 0.2s, border-color 0.25s;
   user-select: none;
+  background-color: hsl(0, 0%, 99%);
 }
 button:hover {
   border-color: #9697a9;
