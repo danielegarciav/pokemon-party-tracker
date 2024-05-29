@@ -5,6 +5,11 @@ import { store } from './store/root';
 import { Provider as ReduxProvider } from 'react-redux';
 import App from './App.tsx';
 
+const reactRootElement = document.getElementById('root');
+if (!reactRootElement) {
+  throw new Error('Root element not found');
+}
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -14,12 +19,12 @@ const queryClient = new QueryClient({
   },
 });
 
-createRoot(document.getElementById('root')!).render(
+createRoot(reactRootElement).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ReduxProvider store={store}>
         <App />
       </ReduxProvider>
     </QueryClientProvider>
-  </StrictMode>
+  </StrictMode>,
 );
