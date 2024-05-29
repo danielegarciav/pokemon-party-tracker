@@ -2,15 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import { useState, type CSSProperties as CSSProps } from 'react';
 import css from './App.module.css';
 import { FadingImg } from './components/FadingImg';
-import { getTypeBgColor } from './data/pokemon-types';
+import { getTypeBgColor, pokemonTypeNames } from './data/pokemon-types';
 import { getPokemonList } from './queries/pokemon';
 import { kebabCaseToTitleCase as formatName } from './util/case-conversion';
 
 export default function App() {
   const [page, setPage] = useState(0);
+  const [pokemonTypeFilter, setPokemonTypeFilter] = useState<string>('');
+
   const query = useQuery({
     queryFn: getPokemonList,
-    queryKey: ['pokemon-list', { limit: 20, offset: page * 20 }],
+    queryKey: ['pokemon-list', { limit: 20, offset: page * 20, type: pokemonTypeFilter || undefined }],
   });
 
   if (query.isPending) return <p>Loading...</p>;
@@ -24,8 +26,27 @@ export default function App() {
     );
 
   const lastPage = query.data.lastPage;
+  const displayedTypeFilter = query.data.type || '';
+
   return (
     <div>
+      <p>
+        Filter by pokemon type:
+        <select
+          value={pokemonTypeFilter}
+          onChange={e => {
+            setPage(0);
+            setPokemonTypeFilter(e.target.value);
+          }}
+        >
+          <option value="">Show All</option>
+          {pokemonTypeNames.map(type => (
+            <option key={type} value={type}>
+              {formatName(type)}
+            </option>
+          ))}
+        </select>
+      </p>
       <table className={css.pokemonTable} style={{ opacity: query.isPlaceholderData ? 0.5 : 1 }}>
         <thead>
           <tr>
@@ -67,13 +88,19 @@ export default function App() {
         </tbody>
       </table>
       <div className={css.pokemonTableFooter}>
-        <button onClick={() => setPage(page => Math.max(0, page - 1))} disabled={page === 0}>
+        <button
+          onClick={() => setPage(page => Math.max(0, page - 1))}
+          disabled={page === 0 || displayedTypeFilter !== pokemonTypeFilter}
+        >
           Prev
         </button>
         <span>
           Page {page + 1} of {lastPage + 1}
         </span>
-        <button onClick={() => setPage(page => Math.min(lastPage, page + 1))} disabled={page >= lastPage}>
+        <button
+          onClick={() => setPage(page => Math.min(lastPage, page + 1))}
+          disabled={page >= lastPage || displayedTypeFilter !== pokemonTypeFilter}
+        >
           Next
         </button>
       </div>

@@ -31,4 +31,6 @@ export const pokemonTypes: Record<string, PokemonType> = {
   shadow: { id: 10002, bgColor: '#000000' },
 };
 
+export const pokemonTypeNames = Object.keys(pokemonTypes);
+
 export const getTypeBgColor = (type: string) => pokemonTypes[type]?.bgColor ?? '#000000';
